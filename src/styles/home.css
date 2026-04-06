@@ -1,0 +1,164 @@
+/* ⭐ HOME (LANDING) PAGE STYLES */
+.home-container {
+  min-height: 100vh;
+  background: #0f172a;
+  color: white;
+  font-family: 'Outfit', sans-serif;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ⭐ HERO SECTION */
+.hero {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero h1 {
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: titleFade 1s ease-out;
+}
+
+.hero p {
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  max-width: 700px;
+  color: #94a3b8;
+  margin-bottom: 40px;
+  line-height: 1.6;
+  animation: subFade 1.2s ease-out;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 20px;
+  animation: btnFade 1.5s ease-out;
+}
+
+.btn-primary {
+  padding: 18px 40px;
+  background: #4361ee;
+  color: white;
+  border-radius: 50px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: .3s;
+  box-shadow: 0 10px 30px rgba(67, 97, 238, 0.4);
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(67, 97, 238, 0.6); }
+
+.btn-secondary {
+  padding: 18px 40px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: white;
+  border-radius: 50px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: .3s;
+}
+.btn-secondary:hover { background: rgba(255,255,255,0.1); }
+
+/* ⭐ HOW IT WORKS STEPS */
+.step-card {
+  flex: 1;
+  min-width: 250px;
+  max-width: 300px;
+  background: rgba(255,255,255,0.03);
+  padding: 30px;
+  border-radius: 30px;
+  position: relative;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.step-num {
+  width: 50px;
+  height: 50px;
+  background: #4361ee;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 1.5rem;
+  margin: 0 auto 20px auto;
+  box-shadow: 0 10px 20px rgba(67, 97, 238, 0.4);
+}
+
+.step-card h3 { margin-bottom: 10px; font-size: 1.3rem; }
+.step-card p { font-size: 0.95rem; color: #94a3b8; }
+
+/* ⭐ FEATURES */
+
+.features {
+  padding: 100px 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.feat-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.05);
+  padding: 40px;
+  border-radius: 30px;
+  transition: .4s;
+  cursor: default;
+}
+.feat-card:hover { 
+  background: rgba(255,255,255,0.07); 
+  transform: translateY(-10px);
+  border-color: rgba(255,255,255,0.2);
+}
+.feat-card span { font-size: 3rem; margin-bottom: 20px; display: block; }
+.feat-card h3 { font-size: 1.5rem; margin-bottom: 15px; color: white; }
+.feat-card p { color: #94a3b8; line-height: 1.5; }
+
+/* ⭐ STATS */
+.stats-bar {
+  padding: 60px 20px;
+  background: rgba(255,255,255,0.02);
+  border-top: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.stat-item h2 { font-size: 3rem; margin: 0; color: #4361ee; }
+.stat-item p { color: #94a3b8; margin: 5px 0 0 0; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+
+/* ⭐ ANIMATIONS */
+@keyframes titleFade { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes subFade { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes btnFade { from { opacity: 0; } to { opacity: 1; } }
+
+/* ⭐ FLOATING BLOB BACKGROUND */
+.home-bg-blob {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(67, 97, 238, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  top: -200px;
+  right: -200px;
+  z-index: 1;
+  filter: blur(80px);
+}

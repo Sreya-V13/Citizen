@@ -31,37 +31,51 @@ function TrackComplaint() {
       )}
 
       <div className="track-list">
-        {filtered.map((c) => (
-          <div key={c.id} className="track-card">
+        {filtered.map((c) => {
+          const timeline = typeof c.timeline === 'string' ? JSON.parse(c.timeline) : (c.timeline || []);
+          return (
+            <div key={c.$id || c.id} className="track-card">
 
-            {/* ⭐ TOP */}
-            <div className="track-top">
-              <h3>{c.department}</h3>
-              <span className={`status ${c.status}`}>
-                {c.status}
-              </span>
+              {/* ⭐ TOP */}
+              <div className="track-top">
+                <h3>{c.department}</h3>
+                <span className={`status ${c.status}`}>
+                  {c.status}
+                </span>
+              </div>
+
+              <p><b>Category:</b> {c.category}</p>
+              <p><b>Description:</b> {c.desc}</p>
+              <p><b>Location:</b> {c.location}</p>
+
+              {/* ⭐ IMAGE */}
+              {c.image && (
+                <img src={c.image} className="img-preview" alt="Complaint" />
+              )}
+
+              {/* ⭐ ENHANCED AUDIT TIMELINE */}
+              <div className="track-timeline" style={{ marginTop: "20px", borderLeft: "2px solid #8a6f5c", paddingLeft: "20px" }}>
+                {timeline.length > 0 ? timeline.map((t, i) => (
+                  <div key={i} className="timeline-step" style={{ position: "relative", marginBottom: "15px" }}>
+                    <div style={{ position: "absolute", left: "-27px", top: "5px", width: "12px", height: "12px", borderRadius: "50%", background: "#8a6f5c" }}></div>
+                    <span style={{ fontSize: "0.85rem", fontWeight: "700", color: "#8a6f5c", textTransform: "uppercase" }}>{t.status}</span>
+                    <p style={{ margin: "4px 0", fontSize: "0.9rem", color: "#444" }}>{t.remark}</p>
+                    <small style={{ color: "#999" }}>{new Date(t.timestamp).toLocaleString()}</small>
+                  </div>
+                )) : (
+                  <div className="timeline-step" style={{ position: "relative" }}>
+                    <div style={{ position: "absolute", left: "-27px", top: "5px", width: "12px", height: "12px", borderRadius: "50%", background: "#ccc" }}></div>
+                    <span style={{ fontSize: "0.85rem", fontWeight: "700", color: "#999" }}>PENDING</span>
+                    <p style={{ margin: "4px 0", fontSize: "0.9rem", color: "#999" }}>Awaiting acknowledgment from authority.</p>
+                  </div>
+                )}
+              </div>
+
+
             </div>
+          );
+        })}
 
-            <p><b>Category:</b> {c.category}</p>
-            <p><b>Description:</b> {c.desc}</p>
-            <p><b>Location:</b> {c.location}</p>
-
-            {/* ⭐ IMAGE */}
-            {c.image && (
-              <img src={c.image} className="img-preview" />
-            )}
-
-            {/* ⭐ TIMELINE */}
-            <div className="timeline">
-              {c.timeline.map((t, i) => (
-                <div key={i} className="step active">
-                  {t}
-                </div>
-              ))}
-            </div>
-
-          </div>
-        ))}
       </div>
     </div>
   );

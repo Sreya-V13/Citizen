@@ -1,340 +1,239 @@
-body{
-    overflow:auto;
-    background:linear-gradient(135deg,#efe6dd,#e6d8c9);
-    animation:bgMove 15s ease infinite alternate;
-  }
-  
-  @keyframes bgMove{
-    from{background-position:0 0}
-    to{background-position:100% 100%}
-  }
-  
-  /* ⭐ PARTICLE BACKGROUND */
-  .split::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:
-      radial-gradient(circle at 20% 30%,rgba(255,255,255,0.35),transparent 40%),
-      radial-gradient(circle at 80% 70%,rgba(255,255,255,0.25),transparent 40%);
-    animation:particles 12s infinite linear;
-    pointer-events:none;
-  }
-  @keyframes particles{
-    from{transform:translateY(0)}
-    to{transform:translateY(-80px)}
-  }
-  
-  /* ⭐ SPLIT CONTAINER */
-  .split{
-    display:flex;
-    height:100vh;
-    position:relative;
-    overflow:hidden;
-  }
-  
-  /* ⭐ LIQUID GRADIENT PANELS */
-  .left{
-    flex:1;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    cursor:pointer;
-    position:relative;
-    overflow:hidden;
-    transition:0.6s;
-    background:linear-gradient(-45deg,#6b9cff,#a5c7ff,#7aa8ff,#6b9cff);
-    background-size:400% 400%;
-    animation:liquid 12s ease infinite;
-  }
-  
-  .right{
-    flex:1;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    cursor:pointer;
-    position:relative;
-    overflow:hidden;
-    transition:0.6s;
-    background:linear-gradient(-45deg,#ff7b7b,#ffc2a1,#ff9d8c,#ff7b7b);
-    background-size:400% 400%;
-    animation:liquid 12s ease infinite;
-  }
-  
-  @keyframes liquid{
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-  }
-  
-  /* ⭐ CURSOR SPOTLIGHT */
-  .left::after,
-  .right::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:radial-gradient(circle at var(--x,50%) var(--y,50%),rgba(255,255,255,0.35),transparent 40%);
-    pointer-events:none;
-  }
-  
-  /* ⭐ FLEX SHIFT */
-  .left:hover{ flex:1.15; }
-  .right:hover{ flex:1.15; }
-  
-  /* ⭐ FLOATING GLASS BLOB */
-  .split::after{
-    content:"";
-    position:absolute;
-    width:320px;
-    height:320px;
-    border-radius:50%;
-    background:rgba(255,255,255,0.25);
-    filter:blur(60px);
-    animation:blob 10s infinite alternate;
-  }
-  @keyframes blob{
-    from{transform:translate(-50px,-30px)}
-    to{transform:translate(60px,40px)}
-  }
-  
-  /* ⭐ ROLE CARD */
-  .role-card{
-    position:relative;
-    backdrop-filter:blur(25px);
-    background:rgba(255,255,255,0.35);
-    padding:55px;
-    border-radius:30px;
-    text-align:center;
-    box-shadow:0 30px 80px rgba(0,0,0,0.25);
-    animation:float 3s infinite ease-in-out;
-    overflow:hidden;
-    transform-style:preserve-3d;
-    transition:0.2s;
-  }
-  
-  /* ⭐ 3D TILT EFFECT */
-  .left:hover .role-card,
-  .right:hover .role-card{
-    transform:rotateX(6deg) rotateY(-6deg) scale(1.08);
-  }
-  
-  /* ⭐ CARD GLOW */
-  .role-card::after{
-    content:"";
-    position:absolute;
-    inset:-40%;
-    background:radial-gradient(circle,rgba(255,255,255,0.4),transparent 60%);
-    opacity:0.5;
-    animation:glow 6s infinite alternate;
-  }
-  @keyframes glow{
-    from{opacity:0.2}
-    to{opacity:0.5}
-  }
-  
-  /* ⭐ SHIMMER */
-  .role-card::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(120deg,transparent,rgba(255,255,255,0.6),transparent);
-    transform:translateX(-100%);
-    transition:0.6s;
-  }
-  .left:hover .role-card::before,
-  .right:hover .role-card::before{
-    transform:translateX(100%);
-  }
-  
-  /* ⭐ FLOAT */
-  @keyframes float{
-    0%{transform:translateY(0)}
-    50%{transform:translateY(-14px)}
-    100%{transform:translateY(0)}
-  }
-  
-  /* ⭐ ICONS */
-  .icon{
-    font-size:3rem;
-    margin-bottom:15px;
-    animation:iconFloat 2.5s infinite ease-in-out;
-  }
-  @keyframes iconFloat{
-    0%{transform:translateY(0)}
-    50%{transform:translateY(-10px)}
-    100%{transform:translateY(0)}
-  }
-  
-  /* ⭐ LOGIN PAGE */
-  .auth{
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    position:relative;
-  }
-  
-  /* ⭐ LOGIN COLORS */
-  .citizen{
-    background:linear-gradient(135deg,#5f9cff,#b6d0ff);
-  }
-  .admin{
-    background:linear-gradient(135deg,#ff6a6a,#ffc3a0);
-  }
-  
-  /* ⭐ MOVING BLOBS LOGIN */
-  .auth::before,
-  .auth::after{
-    content:"";
-    position:absolute;
-    width:400px;
-    height:400px;
-    border-radius:50%;
-    filter:blur(90px);
-    animation:move 10s infinite alternate ease-in-out;
-  }
-  .auth::before{
-    background:#5f9cff;
-    top:-100px;
-    left:-100px;
-  }
-  .auth::after{
-    background:#ff6a6a;
-    bottom:-120px;
-    right:-120px;
-  }
-  @keyframes move{
-    from{transform:translateY(0)}
-    to{transform:translateY(60px)}
-  }
-  
-  /* ⭐ LOGIN CARD */
-  .auth-card{
-    backdrop-filter:blur(20px);
-    background:rgba(255,255,255,0.4);
-    padding:45px;
-    border-radius:30px;
-    width:380px;
-    box-shadow:0 25px 70px rgba(0,0,0,0.25);
-    animation:slide 0.6s ease;
-  }
-  
-  /* ⭐ SOCIAL ICONS */
-  .social{
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    margin:15px 0;
-  }
-  .social div{
-    width:40px;
-    height:40px;
-    border-radius:50%;
-    background:white;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    cursor:pointer;
-    transition:0.3s;
-  }
-  .social div:hover{
-    transform:scale(1.25);
-    box-shadow:0 8px 20px rgba(0,0,0,0.2);
-  }
-  
-  /* ⭐ INPUT */
-  .auth-card input{
-    width:100%;
-    padding:14px;
-    margin:12px 0;
-    border-radius:12px;
-    border:none;
-    background:rgba(255,255,255,0.8);
-    transition:0.3s;
-  }
-  .auth-card input:focus{
-    outline:none;
-    transform:scale(1.03);
-  }
-  
-  /* ⭐ BUTTON */
-  .auth-card button{
-    width:100%;
-    padding:14px;
-    border:none;
-    background:#3d5afe;
-    color:white;
-    border-radius:12px;
-    cursor:pointer;
-    transition:0.3s;
-  }
-  .auth-card button:hover{
-    transform:translateY(-3px);
-    box-shadow:0 8px 20px rgba(0,0,0,0.2);
-  }
-  
-  /* ⭐ MOBILE */
-  @media(max-width:768px){
-    .split{flex-direction:column;}
-  }
-  
-  @keyframes slide{
-    from{opacity:0; transform:translateY(50px)}
-    to{opacity:1; transform:translateY(0)}
-  }
-  /* ⭐ GHOST BUTTON (SHOW PASSWORD + CHANGE ROLE) */
-.ghost-btn{
-    width:100%;
-    margin-top:6px;
-    padding:10px;
-    border-radius:12px;
-    border:2px solid rgba(255,255,255,0.35);
-    background:transparent;
-    color:#333;
-    cursor:pointer;
-    transition:0.3s;
-  }
-  
-  /* ⭐ HOVER ANIMATION */
-  .ghost-btn:hover{
-    background:rgba(255,255,255,0.25);
-    transform:translateY(-2px);
-  }
-  
-  /* ⭐ CHANGE ROLE VARIANT */
-  .ghost-btn.change{
-    margin-top:10px;
-    border-color:rgba(0,0,0,0.2);
-  }
-  
-  /* ⭐ ERROR */
-  .error{
-    color:red;
-    margin:8px 0;
-    text-align:center;
-  }
-  /* ⭐ ANIMATED LINK TEXT */
-.link-text{
-    text-align:center;
-    margin:8px 0;
-    cursor:pointer;
-    font-weight:500;
-    transition:0.3s;
-  }
-  
-  /* ⭐ HOVER MICRO ANIMATION */
-  .link-text:hover{
-    transform:translateY(-2px) scale(1.05);
-    color:#3d5afe;
-  }
-  
-  /* ⭐ CHANGE ROLE VARIANT */
-  .link-text.change{
-    margin-top:12px;
-  }
-  
-  .error{
-    color:red;
-    text-align:center;
-  }
+/* ⭐ MODERN AUTH STYLES */
+:root {
+  --primary: #4361ee;
+  --primary-hover: #3a56d4;
+  --citizen-grad: linear-gradient(135deg, #4895ef, #4361ee);
+  --admin-grad: linear-gradient(135deg, #f72585, #7209b7);
+  --glass: rgba(255, 255, 255, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.2);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Outfit', sans-serif;
+  background: #0f172a;
+  overflow-x: hidden;
+}
+
+/* ⭐ FLOATING BLOBS FOR GLASS BACKGROUND */
+.auth-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background: #0f172a;
+  overflow: hidden;
+}
+
+.blob {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+  filter: blur(80px);
+  border-radius: 50%;
+  opacity: 0.4;
+  animation: float 20s infinite alternate;
+}
+
+.blob:nth-child(2) {
+  width: 400px;
+  height: 400px;
+  background: linear-gradient(135deg, #ec4899, #f43f5e);
+  right: -100px;
+  bottom: -100px;
+  animation-duration: 15s;
+}
+
+@keyframes float {
+  from { transform: translate(0, 0) rotate(0deg); }
+  to { transform: translate(100px, 100px) rotate(360deg); }
+}
+
+/* ⭐ ROLE SELECTION SPLIT */
+.split {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.left, .right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  cursor: pointer;
+  color: white;
+  text-align: center;
+  padding: 40px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.left { background: rgba(72, 149, 239, 0.2); }
+.right { background: rgba(247, 37, 133, 0.2); }
+
+.left:hover { flex: 1.6; background: rgba(72, 149, 239, 0.4); }
+.right:hover { flex: 1.6; background: rgba(247, 37, 133, 0.4); }
+
+.role-card {
+  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 40px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+}
+
+.left:hover .role-card, .right:hover .role-card {
+  transform: scale(1.05) translateY(-10px);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+}
+
+.role-card h1 {
+  font-size: 3.5rem;
+  margin: 10px 0;
+  font-weight: 800;
+  letter-spacing: -2px;
+}
+
+.role-card p {
+  font-size: 1.1rem;
+  opacity: 0.8;
+  max-width: 300px;
+}
+
+.role-card .icon {
+  font-size: 4.5rem;
+  margin-bottom: 20px;
+}
+
+/* ⭐ LOGIN CONTAINER */
+.auth {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease;
+}
+
+.auth-card {
+  background: var(--glass);
+  backdrop-filter: blur(40px);
+  padding: 50px;
+  border-radius: 40px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+  border: 1px solid var(--glass-border);
+  animation: cardEntry 1s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes cardEntry {
+  from { opacity: 0; transform: translateY(60px) scale(0.9); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.auth-card h2 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.auth-card input {
+  width: 100%;
+  padding: 18px 24px;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  border: 2px solid transparent;
+  background: white;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.auth-card input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 10px 30px rgba(67, 97, 238, 0.1);
+}
+
+.auth-card button {
+  width: 100%;
+  padding: 18px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.auth-card button:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 15px 35px rgba(67, 97, 238, 0.3);
+}
+
+.auth-card button:active {
+  transform: translateY(0);
+}
+
+/* ⭐ HELPER TEXT */
+.password-toggle {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.error {
+  color: #dc3545;
+  background: rgba(220, 53, 69, 0.1);
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.footer-link {
+  text-align: center;
+  margin-top: 25px;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: var(--primary);
+}
+
+/* ⭐ RESPONSIVE */
+@media (max-width: 768px) {
+  .split { flex-direction: column; }
+  .role-card h1 { font-size: 2.5rem; }
+  .auth-card { padding: 30px; margin: 20px; }
+}

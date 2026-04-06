@@ -1,18 +1,40 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+
 import "../styles/auth.css";
 
-function Login() {
-  const { login } = useContext(AuthContext);
-  const navigate = useNavigate(); // ✅ ONLY HERE
+function Register() {
+  const { register } = useContext(AuthContext);
+  const location = useLocation();
+  const [role, setRole] = useState(location.state?.role || null);
 
-  const [role, setRole] = useState(null);
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
+  const [name, setName] = useState("");
   const [pin, setPin] = useState("");
   const [show, setShow] = useState(false);
   const [error, setError] = useState("");
+
+  const handleRegister = async () => {
+    setError("");
+    if (!email || !pass || !name) {
+      setError("Please fill all fields");
+      return;
+    }
+
+    try {
+      if (role === "admin" && pin !== "1234") {
+        setError("Invalid Authority PIN");
+        return;
+      }
+
+      await register({ role, email, password: pass, name });
+      navigate(role === "admin" ? "/admin" : "/dashboard");
+    } catch (err) {
+      setError(err.message || "Registration failed");
+    }
+  };
 
   /* ⭐ ROLE SELECTION SPLIT */
   if (!role) {
@@ -24,41 +46,24 @@ function Login() {
         </div>
         <div className="left" onClick={() => setRole("citizen")}>
 
+
           <div className="role-card">
-            <div className="icon">🏠</div>
+            <div className="icon">🌱</div>
             <h1>Citizen</h1>
-            <p>Empower your community. Report civic issues in seconds.</p>
+            <p>Join the movement. Start reporting issues today.</p>
           </div>
         </div>
 
         <div className="right" onClick={() => setRole("admin")}>
           <div className="role-card">
-            <div className="icon">🏛️</div>
+            <div className="icon">🛡️</div>
             <h1>Authority</h1>
-            <p>Streamline infrastructure management. Resolve reports efficiently.</p>
+            <p>Ready to resolve? Sign up to manage civic duties.</p>
           </div>
         </div>
       </div>
     );
   }
-
-  const handleLogin = async () => {
-    setError("");
-
-    try {
-      if (role === "admin") {
-        await login({ role: "authority", email, password: pass, pin });
-        navigate("/admin");
-      } else {
-        await login({ role: "citizen", email, password: pass });
-        navigate("/dashboard");
-      }
-    } catch (err) {
-      setError(err.message || "Login failed. Please check credentials.");
-    }
-  };
-
-  /* ⭐ LOGIN PAGE */
 
   return (
     <div className={`auth ${role}`}>
@@ -68,20 +73,17 @@ function Login() {
       </div>
       <div className="auth-card">
 
-        <h2>{role === "citizen" ? "Citizen Login" : "Authority Login"}</h2>
+        <h2>{role === "citizen" ? "Citizen SignUp" : "Authority SignUp"}</h2>
 
         {error && <div className="error">{error}</div>}
 
         <div className="form-group">
-          {role === "admin" && (
-            <input
-              type="text"
-              placeholder="Official Authority PIN"
-              value={pin}
-              autoFocus
-              onChange={(e) => setPin(e.target.value)}
-            />
-          )}
+          <input
+            type="text"
+            placeholder="Full Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
 
           <input
             type="email"
@@ -93,7 +95,7 @@ function Login() {
           <div style={{ position: "relative" }}>
             <input
               type={show ? "text" : "password"}
-              placeholder="Enter Password"
+              placeholder="Create Password"
               value={pass}
               onChange={(e) => setPass(e.target.value)}
             />
@@ -104,10 +106,19 @@ function Login() {
               {show ? "Hide" : "Show"}
             </span>
           </div>
+
+          {role === "admin" && (
+            <input
+              type="text"
+              placeholder="Authority Validation PIN"
+              value={pin}
+              onChange={(e) => setPin(e.target.value)}
+            />
+          )}
         </div>
 
-        <button onClick={handleLogin}>
-          Sign In
+        <button onClick={handleRegister}>
+          Create Account
         </button>
 
         <div 
@@ -123,15 +134,13 @@ function Login() {
         <div 
           className="footer-link"
           style={{ marginTop: "10px", fontSize: "0.9rem" }}
-          onClick={() => navigate("/register", { state: { role } })}
+          onClick={() => navigate("/")}
         >
-          New to Citizen Voice? Create Account
+          Already have an account? Sign In
         </div>
-
       </div>
     </div>
   );
 }
 
-
-export default Login;
+export default Register;

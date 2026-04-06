@@ -919,4 +919,4 @@ button.secondary:hover { background: #e0e0e0; }
 
 .step-content { animation: slideIn .4s ease-out; }
 @keyframes slideIn { from{opacity:0; transform:translateX(30px)} to{opacity:1; transform:translateX(0)} }
-
+

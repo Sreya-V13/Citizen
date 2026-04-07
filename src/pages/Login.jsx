@@ -14,7 +14,7 @@ function Login() {
   const [show, setShow] = useState(false);
   const [error, setError] = useState("");
 
-  /* ⭐ ROLE SELECTION SPLIT */
+  /* ⭐ ROLE SELECTION SPLIT (3-WAY) */
   if (!role) {
     return (
       <div className="split">
@@ -22,19 +22,27 @@ function Login() {
           <div className="blob"></div>
           <div className="blob"></div>
         </div>
+        
         <div className="left" onClick={() => setRole("citizen")}>
-
           <div className="role-card">
             <div className="icon">🏠</div>
-            <h1>Citizen</h1>
+            <h1 className="cv-text-gradient">Citizen</h1>
             <p>Empower your community. Report civic issues in seconds.</p>
+          </div>
+        </div>
+
+        <div className="middle" onClick={() => setRole("officer")}>
+          <div className="role-card">
+            <div className="icon">🛠️</div>
+            <h1 className="cv-text-gradient">Officer</h1>
+            <p>Field specialist? Log in to manage assigned tasks.</p>
           </div>
         </div>
 
         <div className="right" onClick={() => setRole("admin")}>
           <div className="role-card">
             <div className="icon">🏛️</div>
-            <h1>Authority</h1>
+            <h1 className="cv-text-gradient">Authority</h1>
             <p>Streamline infrastructure management. Resolve reports efficiently.</p>
           </div>
         </div>
@@ -49,6 +57,9 @@ function Login() {
       if (role === "admin") {
         await login({ role: "authority", email, password: pass, pin });
         navigate("/admin");
+      } else if (role === "officer") {
+        await login({ role: "officer", email, password: pass });
+        navigate("/officer");
       } else {
         await login({ role: "citizen", email, password: pass });
         navigate("/dashboard");
@@ -68,7 +79,10 @@ function Login() {
       </div>
       <div className="auth-card">
 
-        <h2>{role === "citizen" ? "Citizen Login" : "Authority Login"}</h2>
+        <h2 className="cv-text-gradient">
+          {role === "citizen" ? "Citizen Login" : 
+           role === "officer" ? "Officer Login" : "Authority Login"}
+        </h2>
 
         {error && <div className="error">{error}</div>}
 

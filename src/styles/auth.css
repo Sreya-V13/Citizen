@@ -1,11 +1,12 @@
 /* ⭐ MODERN AUTH STYLES */
 :root {
   --primary: #4361ee;
-  --primary-hover: #3a56d4;
-  --citizen-grad: linear-gradient(135deg, #4895ef, #4361ee);
-  --admin-grad: linear-gradient(135deg, #f72585, #7209b7);
-  --glass: rgba(255, 255, 255, 0.45);
-  --glass-border: rgba(255, 255, 255, 0.2);
+  --primary-hover: #4cc9f0;
+  --citizen-grad: linear-gradient(135deg, #4361ee, #4cc9f0);
+  --admin-grad: linear-gradient(135deg, #f72585, #b5179e);
+  --officer-grad: linear-gradient(135deg, #06d6a0, #05668d);
+  --glass: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.08);
 }
 
 body {
@@ -53,7 +54,7 @@ body {
   to { transform: translate(100px, 100px) rotate(360deg); }
 }
 
-/* ⭐ ROLE SELECTION SPLIT */
+/* ⭐ ROLE SELECTION SPLIT (3-WAY) */
 .split {
   display: flex;
   height: 100vh;
@@ -61,7 +62,7 @@ body {
   overflow: hidden;
 }
 
-.left, .right {
+.left, .middle, .right {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -74,26 +75,30 @@ body {
   text-align: center;
   padding: 40px;
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.05);
 }
 
-.left { background: rgba(72, 149, 239, 0.2); }
-.right { background: rgba(247, 37, 133, 0.2); }
+.left { background: rgba(72, 149, 239, 0.15); }
+.middle { background: rgba(6, 214, 160, 0.1); }
+.right { background: rgba(247, 37, 133, 0.15); }
 
-.left:hover { flex: 1.6; background: rgba(72, 149, 239, 0.4); }
-.right:hover { flex: 1.6; background: rgba(247, 37, 133, 0.4); }
+.left:hover { flex: 1.4; background: rgba(72, 149, 239, 0.35); }
+.middle:hover { flex: 1.4; background: rgba(6, 214, 160, 0.3); }
+.right:hover { flex: 1.4; background: rgba(247, 37, 133, 0.35); }
 
 .role-card {
   transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   z-index: 2;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 40px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 40px 30px;
   border-radius: 30px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(20px);
+  width: 100%;
+  max-width: 320px;
 }
 
-.left:hover .role-card, .right:hover .role-card {
+.left:hover .role-card, .middle:hover .role-card, .right:hover .role-card {
   transform: scale(1.05) translateY(-10px);
   box-shadow: 0 30px 60px rgba(0,0,0,0.3);
 }
@@ -146,11 +151,12 @@ body {
 }
 
 .auth-card h2 {
-  font-size: 2.2rem;
-  font-weight: 800;
-  color: #1a1a1a;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: white;
   margin-bottom: 30px;
   text-align: center;
+  letter-spacing: -1px;
 }
 
 .auth-card input {
@@ -158,17 +164,23 @@ body {
   padding: 18px 24px;
   margin-bottom: 20px;
   border-radius: 20px;
-  border: 2px solid transparent;
-  background: white;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: white;
   font-size: 1rem;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-sizing: border-box;
+}
+
+.auth-card input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
 }
 
 .auth-card input:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 10px 30px rgba(67, 97, 238, 0.1);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 20px rgba(67, 97, 238, 0.2);
 }
 
 .auth-card button {
@@ -222,13 +234,14 @@ body {
   text-align: center;
   margin-top: 25px;
   font-weight: 600;
-  color: #666;
+  color: #94a3b8;
   cursor: pointer;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .footer-link:hover {
-  color: var(--primary);
+  color: white;
+  transform: translateY(-2px);
 }
 
 /* ⭐ RESPONSIVE */

@@ -10,7 +10,7 @@
 
 /* ⭐ HERO SECTION */
 .hero {
-  height: 90vh;
+  min-height: 90vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -19,6 +19,7 @@
   padding: 0 20px;
   position: relative;
   z-index: 2;
+  overflow: hidden;
 }
 
 .hero h1 {
@@ -87,17 +88,19 @@
 }
 
 .step-num {
-  width: 50px;
-  height: 50px;
-  background: #4361ee;
-  border-radius: 15px;
+  width: 60px;
+  height: 60px;
+  background: var(--cv-accent);
+  border-radius: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 900;
-  font-size: 1.5rem;
-  margin: 0 auto 20px auto;
-  box-shadow: 0 10px 20px rgba(67, 97, 238, 0.4);
+  font-size: 1.8rem;
+  margin: 0 auto 30px auto;
+  box-shadow: 0 15px 35px rgba(67, 97, 238, 0.4);
+  color: white;
+  border: 2px solid rgba(255,255,255,0.2);
 }
 
 .step-card h3 { margin-bottom: 10px; font-size: 1.3rem; }
@@ -142,23 +145,58 @@
   gap: 30px;
 }
 
-.stat-item h2 { font-size: 3rem; margin: 0; color: #4361ee; }
+.stat-item h2 { 
+  font-size: clamp(2.5rem, 5vw, 4rem); 
+  margin: 0; 
+  color: #fff; 
+  font-weight: 950;
+  letter-spacing: -2px;
+}
 .stat-item p { color: #94a3b8; margin: 5px 0 0 0; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
 
 /* ⭐ ANIMATIONS */
 @keyframes titleFade { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes subFade { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes btnFade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes bgAnim { 0% { background-position: 0% 50% } 50% { background-position: 100% 50% } 100% { background-position: 0% 50% } }
+
+/* ✨ Glow Effect */
+.node {
+  filter: drop-shadow(0 0 15px rgba(67, 97, 238, 0.6));
+}
+
+/* 🔴 Pulse Animation */
+.pulse {
+  transform-origin: center;
+  animation: pulseAnim 3s infinite ease-in-out;
+}
+
+@keyframes pulseAnim {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.4); opacity: 0.4; }
+  100% { transform: scale(1); opacity: 0.8; }
+}
+
+@keyframes titleFade { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes subFade { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes btnFade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes bgAnim { 0% { background-position: 0% 50% } 50% { background-position: 100% 50% } 100% { background-position: 0% 50% } }
 
 /* ⭐ FLOATING BLOB BACKGROUND */
 .home-bg-blob {
   position: absolute;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(67, 97, 238, 0.15) 0%, transparent 70%);
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(67, 97, 238, 0.1) 0%, transparent 70%);
   border-radius: 50%;
-  top: -200px;
-  right: -200px;
+  top: -300px;
+  left: -200px;
   z-index: 1;
-  filter: blur(80px);
+  filter: blur(120px);
+  animation: blobFloat 20s infinite alternate linear;
+}
+
+@keyframes blobFloat {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(100px, 50px) scale(1.1); }
 }

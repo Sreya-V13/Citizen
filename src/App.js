@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard";
 import AddComplaint from "./pages/AddComplaint";
 import TrackComplaint from "./pages/TrackComplaint";
 import AdminDashboard from "./pages/AdminDashboard";
+import OfficerDashboard from "./pages/OfficerDashboard";
 
 import { ComplaintProvider } from "./context/ComplaintContext";
 import { AuthProvider } from "./context/AuthContext";
@@ -42,6 +43,7 @@ function AppContent() {
         <Route path="/add" element={<AddComplaint />} />
         <Route path="/track" element={<TrackComplaint />} />
         <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/officer" element={<OfficerDashboard />} />
       </Routes>
     </>
   );

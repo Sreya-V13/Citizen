@@ -28,15 +28,21 @@ function Register() {
         setError("Invalid Authority PIN");
         return;
       }
+      if (role === "officer" && pin !== "2024") {
+        setError("Invalid Field Officer PIN");
+        return;
+      }
 
       await register({ role, email, password: pass, name });
-      navigate(role === "admin" ? "/admin" : "/dashboard");
+      if (role === "admin") navigate("/admin");
+      else if (role === "officer") navigate("/officer");
+      else navigate("/dashboard");
     } catch (err) {
       setError(err.message || "Registration failed");
     }
   };
 
-  /* ⭐ ROLE SELECTION SPLIT */
+  /* ⭐ ROLE SELECTION SPLIT (3-WAY) */
   if (!role) {
     return (
       <div className="split">
@@ -44,21 +50,28 @@ function Register() {
           <div className="blob"></div>
           <div className="blob"></div>
         </div>
+        
         <div className="left" onClick={() => setRole("citizen")}>
-
-
           <div className="role-card">
             <div className="icon">🌱</div>
-            <h1>Citizen</h1>
+            <h1 className="cv-text-gradient">Citizen</h1>
             <p>Join the movement. Start reporting issues today.</p>
+          </div>
+        </div>
+
+        <div className="middle" onClick={() => setRole("officer")}>
+          <div className="role-card">
+            <div className="icon">🛠️</div>
+            <h1 className="cv-text-gradient">Officer</h1>
+            <p>Field specialist? Sign up to resolve civic tasks.</p>
           </div>
         </div>
 
         <div className="right" onClick={() => setRole("admin")}>
           <div className="role-card">
             <div className="icon">🛡️</div>
-            <h1>Authority</h1>
-            <p>Ready to resolve? Sign up to manage civic duties.</p>
+            <h1 className="cv-text-gradient">Authority</h1>
+            <p>Administrative lead? Manage and oversee resolution.</p>
           </div>
         </div>
       </div>
@@ -73,7 +86,10 @@ function Register() {
       </div>
       <div className="auth-card">
 
-        <h2>{role === "citizen" ? "Citizen SignUp" : "Authority SignUp"}</h2>
+        <h2 className="cv-text-gradient">
+          {role === "citizen" ? "Citizen SignUp" : 
+           role === "officer" ? "Officer SignUp" : "Authority SignUp"}
+        </h2>
 
         {error && <div className="error">{error}</div>}
 
@@ -107,10 +123,10 @@ function Register() {
             </span>
           </div>
 
-          {role === "admin" && (
+          {(role === "admin" || role === "officer") && (
             <input
               type="text"
-              placeholder="Authority Validation PIN"
+              placeholder={`${role === "admin" ? "Authority" : "Officer"} Validation PIN`}
               value={pin}
               onChange={(e) => setPin(e.target.value)}
             />
